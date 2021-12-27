@@ -106,6 +106,8 @@ in
     screen
     nginx
     fzf
+    gcc
+    gnumake
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
