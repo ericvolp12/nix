@@ -12,6 +12,12 @@ in
       ./hardware-configuration.nix
     ];
 
+  nix.nixPath = [
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    "nixos-config=/home/user/Documents/nix/systems/thinkpad/configuration.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
+  ];
+
   # Use the GRUB 2 boot loader.
   # boot.loader.grub.enable = true;
   # boot.loader.grub.version = 2;
