@@ -3,7 +3,9 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
+let
+  myPkgs = import ../pkgs { inherit pkgs; };
+in
 {
   imports =
     [
@@ -127,6 +129,10 @@
   programs.zsh.enable = true;
   users.users.user.shell = pkgs.zsh;
   environment.shells = with pkgs; [ zsh ];
+  # Configure ZSH and OhMyZsh by default
+  programs.zsh.ohMyZsh.enable = true;
+  programs.zsh.ohMyZsh.customPkgs = [ myPkgs.ericvolp12-zsh-theme ];
+
 
   # NVIDIA Driver Config
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -139,6 +145,7 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
   ];
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

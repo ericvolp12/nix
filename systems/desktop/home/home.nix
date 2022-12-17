@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -40,7 +39,24 @@
     pkgs.nvtop
     pkgs.notion-app-enhanced
     pkgs.fzf
+    pkgs.python3
+    pkgs.go
+    pkgs.slack
+    pkgs.screen
+    pkgs.gcc
+    pkgs.gnumake
+    pkgs.fd
   ];
+
+  programs.git =
+    {
+      enable = true;
+      userName = "Eric Volpert";
+      userEmail = "ericvolp12@gmail.com";
+      aliases = {
+        st = "status";
+      };
+    };
 
   programs.zsh = {
     enable = true;
@@ -55,7 +71,7 @@
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "fzf" ];
-      theme = "norm";
+      theme = "ericvolp12";
     };
   };
 }
