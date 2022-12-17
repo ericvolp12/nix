@@ -150,7 +150,11 @@ in
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
     gnomeExtensions.forge
+    tailscale
   ];
+
+  # Enable Tailscale (https://tailscale.com/blog/nixos-minecraft/)
+  services.tailscale.enable = true;
 
   # Gnome Settings Daemon
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
@@ -173,6 +177,21 @@ in
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  networking.firewall = {
+    # enable the firewall
+    enable = true;
+
+    # always allow traffic from your Tailscale network
+    trustedInterfaces = [ "tailscale0" ];
+
+    # allow the Tailscale UDP port through the firewall
+    allowedUDPPorts = [ config.services.tailscale.port ];
+    checkReversePath = "loose";
+
+    # allow you to SSH in over the public internet
+    allowedTCPPorts = [ 22 ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

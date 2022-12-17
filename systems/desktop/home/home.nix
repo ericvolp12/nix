@@ -48,6 +48,8 @@
     pkgs.gnumake
     pkgs.fd
     pkgs.vscode
+    pkgs.discord
+    pkgs.glowing-bear
   ];
 
   programs.vscode = {
