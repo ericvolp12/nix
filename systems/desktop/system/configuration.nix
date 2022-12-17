@@ -47,7 +47,7 @@ in
     };
   };
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "ev-amd-dk-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -88,10 +88,23 @@ in
     xkbVariant = "";
   };
 
-  # Docker Config
-  virtualisation.docker = {
+  # Enable Podman
+  virtualisation.podman = {
     enable = true;
+    dockerCompat = true;
   };
+
+  # Font Config
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    (nerdfonts.override { fonts = [ "Noto" ]; })
+  ];
+
+
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -120,7 +133,7 @@ in
   users.users.user = {
     isNormalUser = true;
     description = "Eric V";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       firefox
       google-chrome
