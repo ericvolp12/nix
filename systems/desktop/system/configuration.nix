@@ -88,6 +88,11 @@ in
     xkbVariant = "";
   };
 
+  # Docker Config
+  virtualisation.docker = {
+    enable = true;
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -115,7 +120,7 @@ in
   users.users.user = {
     isNormalUser = true;
     description = "Eric V";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       firefox
       google-chrome
@@ -144,8 +149,11 @@ in
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
+    gnomeExtensions.forge
   ];
 
+  # Gnome Settings Daemon
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
