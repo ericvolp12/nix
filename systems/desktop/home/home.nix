@@ -23,12 +23,13 @@
   # changes in each release.
   home.stateVersion = "22.11";
 
-  programs.vscode = {
+  # GTK Dark
+  gtk = {
     enable = true;
-    package = pkgs.vscode;
-    extensions = with pkgs.vscode-extensions; [
-      yzhang.markdown-all-in-one
-    ];
+    theme = {
+      name = "Materia-dark";
+      package = pkgs.materia-theme;
+    };
   };
 
   home.packages = [
@@ -46,7 +47,16 @@
     pkgs.gcc
     pkgs.gnumake
     pkgs.fd
+    pkgs.vscode
   ];
+
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode;
+    extensions = with pkgs.vscode-extensions; [
+      yzhang.markdown-all-in-one
+    ];
+  };
 
   programs.git =
     {
