@@ -142,6 +142,12 @@ in
 
   # Allow Unfree Packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "python3.10-poetry-1.2.2"
+  ];
+
+  # Import overlays
+  nixpkgs.overlays = [ (import /home/user/.config/nixpkgs/overlays/streamdeck.nix) ];
 
   # Set up ZSH, oh-my-zsh configured via HomeManager
   programs.zsh.enable = true;
@@ -157,6 +163,8 @@ in
   hardware.opengl.enable = true;
   # hardware.nvidia.packages = config.boot.kernelPackages.nvidiaPackages.stable;
 
+
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -164,13 +172,16 @@ in
     #  wget
     gnomeExtensions.forge
     tailscale
+    streamdeck-ui
   ];
+
+  programs.streamdeck-ui.enable = true;
 
   # Enable Tailscale (https://tailscale.com/blog/nixos-minecraft/)
   services.tailscale.enable = true;
 
   # Gnome Settings Daemon
-  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon streamdeck-ui ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
