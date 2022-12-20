@@ -45,6 +45,8 @@
     pkgs.vscode
     pkgs.discord
     pkgs.glowing-bear
+    pkgs.terminator
+    pkgs.lutris
   ];
 
   programs.vscode = {
