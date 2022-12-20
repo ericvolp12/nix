@@ -45,6 +45,7 @@
     python3
     go
     git
+    postman
     # Communications
     discord
     slack
