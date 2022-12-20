@@ -27,26 +27,31 @@
     allowUnfree = true;
   };
 
-  home.packages = [
-    pkgs.nixpkgs-fmt
-    pkgs.ferdium
-    pkgs.git
-    pkgs.btop
-    pkgs.nvtop
-    pkgs.notion-app-enhanced
-    pkgs.fzf
-    pkgs.python3
-    pkgs.go
-    pkgs.slack
-    pkgs.screen
-    pkgs.gcc
-    pkgs.gnumake
-    pkgs.fd
-    pkgs.vscode
-    pkgs.discord
-    pkgs.glowing-bear
-    pkgs.terminator
-    pkgs.lutris
+  home.packages = with pkgs; [
+    # Utilities
+    nixpkgs-fmt
+    btop
+    nvtop
+    fzf
+    screen
+    fd
+    # Mouse Config
+    piper
+    # Development
+    terminator
+    vscode
+    gnumake
+    gcc
+    python3
+    go
+    git
+    # Communications
+    discord
+    slack
+    notion-app-enhanced
+    ferdium
+    # Gaming on Linux
+    lutris
   ];
 
   programs.vscode = {
@@ -72,6 +77,7 @@
     shellAliases = {
       ll = "ls -l";
       update = "sudo nixos-rebuild switch";
+      hms = "home-manager switch";
     };
     history = {
       size = 10000;
@@ -79,7 +85,7 @@
     };
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "fzf" ];
+      plugins = [ "git" "fzf" "direnv" ];
       theme = "ericvolp12";
     };
   };

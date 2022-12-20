@@ -163,23 +163,29 @@ in
   programs.zsh.ohMyZsh.enable = true;
   programs.zsh.ohMyZsh.customPkgs = [ myPkgs.ericvolp12-zsh-theme ];
 
+  # Set up Lorri (https://github.com/nix-community/lorri) for direnv-like behavior for NixOS
+  services.lorri.enable = true;
+
 
   # NVIDIA Driver Config
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
   # hardware.nvidia.packages = config.boot.kernelPackages.nvidiaPackages.stable;
 
-
+  # Daemon for Piper HID Settings
+  services.ratbagd.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-    gnomeExtensions.forge
-    tailscale
-    streamdeck-ui
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      #  wget
+      gnomeExtensions.forge
+      tailscale
+      streamdeck-ui
+      direnv
+    ];
 
   programs.streamdeck-ui.enable = true;
 
